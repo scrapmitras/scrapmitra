@@ -41,8 +41,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   }
 
   return (
-    <header className="sticky top-0 z-30 glass-panel border-b border-border-line px-4 py-3 sm:px-6 transition-colors">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 glass-panel border-b border-border-line px-4 py-3 sm:px-6 md:px-10 lg:px-12 xl:px-16 transition-colors">
+      <div className="w-full max-w-[1720px] mx-auto flex items-center justify-between gap-4">
         {/* Left side: Back button or Logo */}
         <div className="flex items-center gap-3 min-w-0">
           {!isRootTab ? (

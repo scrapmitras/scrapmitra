@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Bell, MapPin, User, Menu } from 'lucide-react'
+import { ArrowLeft, Bell, MapPin, User, Menu, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/hooks/useTheme'
 
 interface HeaderProps {
   onOpenDrawer?: () => void
@@ -9,6 +10,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { theme, toggleTheme } = useTheme()
 
   // Determine if current route is a sub-page that needs a back button
   const isRootTab =
@@ -40,8 +42,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   }
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-border-line px-4 py-3 sm:px-6">
-      <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 bg-surface-card/90 backdrop-blur-md border-b border-border-line px-4 py-3 sm:px-6 transition-colors">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         {/* Left side: Back button or Logo */}
         <div className="flex items-center gap-3 min-w-0">
           {!isRootTab ? (
@@ -55,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           ) : (
             <button
               onClick={onOpenDrawer}
-              className="md:hidden w-9 h-9 rounded-full bg-surface-bg flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
+              className="lg:hidden w-9 h-9 rounded-full bg-surface-bg flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5 text-primary-green" />
@@ -63,11 +65,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           )}
 
           <Link to="/" className="flex items-center gap-2 group min-w-0">
-            <span className="w-8 h-8 rounded-lg bg-primary-green text-white flex items-center justify-center font-bold text-lg shadow-sm flex-none">
+            <span className="w-9 h-9 rounded-xl bg-primary-green text-white flex items-center justify-center font-bold text-lg shadow-sm flex-none">
               ♻
             </span>
             <div className="min-w-0">
-              <span className="font-display font-bold text-lg text-primary-green tracking-tight group-hover:text-primary-green-deep block truncate">
+              <span className="font-display font-extrabold text-lg sm:text-xl text-primary-green tracking-tight group-hover:text-primary-green-deep block truncate">
                 {isRootTab ? 'Scrap Mitra' : getPageTitle()}
               </span>
             </div>
@@ -75,11 +77,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
         </div>
 
         {/* Center / Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-content-muted">
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-content-muted">
           <Link
             to="/"
             className={`hover:text-primary-green transition-colors ${
-              location.pathname === '/' ? 'text-primary-green font-semibold' : ''
+              location.pathname === '/' ? 'text-primary-green font-bold' : ''
             }`}
           >
             Home
@@ -87,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           <Link
             to="/categories"
             className={`hover:text-primary-green transition-colors ${
-              location.pathname.startsWith('/categories') ? 'text-primary-green font-semibold' : ''
+              location.pathname.startsWith('/categories') ? 'text-primary-green font-bold' : ''
             }`}
           >
             Categories
@@ -95,23 +97,23 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           <Link
             to="/rates"
             className={`hover:text-primary-green transition-colors ${
-              location.pathname === '/rates' ? 'text-primary-green font-semibold' : ''
+              location.pathname === '/rates' ? 'text-primary-green font-bold' : ''
             }`}
           >
-            Rates
+            Today's Rates
           </Link>
           <Link
             to="/book/scrap"
             className={`hover:text-primary-green transition-colors ${
-              location.pathname === '/book/scrap' ? 'text-primary-green font-semibold' : ''
+              location.pathname === '/book/scrap' ? 'text-primary-green font-bold' : ''
             }`}
           >
             Book Pickup
           </Link>
           <Link
             to="/sell-item"
-            className={`hover:text-primary-green transition-colors ${
-              location.pathname === '/sell-item' ? 'text-action-orange font-semibold' : ''
+            className={`hover:text-action-orange transition-colors ${
+              location.pathname === '/sell-item' ? 'text-action-orange font-bold' : ''
             }`}
           >
             Sell Heavy Item
@@ -119,19 +121,33 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           <Link
             to="/bookings"
             className={`hover:text-primary-green transition-colors ${
-              location.pathname.startsWith('/bookings') ? 'text-primary-green font-semibold' : ''
+              location.pathname.startsWith('/bookings') ? 'text-primary-green font-bold' : ''
             }`}
           >
             My Bookings
           </Link>
         </nav>
 
-        {/* Right side: Location & User controls */}
+        {/* Right side: Location, Dark Mode Toggle & User controls */}
         <div className="flex items-center gap-2 sm:gap-3 flex-none">
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-bg border border-border-line text-xs font-medium text-content-ink">
             <MapPin className="w-3.5 h-3.5 text-primary-green flex-none" />
             <span className="truncate max-w-[120px]">Vijayawada</span>
           </div>
+
+          {/* Dark / Light Mode Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="w-9 h-9 rounded-full bg-surface-bg border border-border-line flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-action-orange" />
+            ) : (
+              <Moon className="w-4 h-4 text-primary-green" />
+            )}
+          </button>
 
           <Link
             to="/notifications"
@@ -139,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4 text-content-muted" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-action-orange ring-2 ring-white" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface-card" />
           </Link>
 
           <Link

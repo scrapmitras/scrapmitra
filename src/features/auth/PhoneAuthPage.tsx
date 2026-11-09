@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ShieldCheck, Mail, ArrowRight } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
+import { ScrapAuth3D } from '@/components/3d/ScrapAuth3D'
 
 export const PhoneAuthPage: React.FC = () => {
   const navigate = useNavigate()
@@ -41,18 +42,18 @@ export const PhoneAuthPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto py-4 sm:py-8 space-y-6">
-      {/* Brand Header */}
-      <div className="text-center space-y-2">
-        <div className="w-14 h-14 rounded-2xl bg-primary-green text-white font-bold text-2xl flex items-center justify-center mx-auto shadow-md">
-          ♻
+    <div className="max-w-md mx-auto py-2 sm:py-6 space-y-4 sm:space-y-6">
+      {/* 3D Scrap Recycling Emblem */}
+      <div className="relative rounded-3xl bg-linear-to-b from-secondary-green-soft/50 to-transparent p-2 border border-border-line/40">
+        <ScrapAuth3D />
+        <div className="text-center space-y-1 mt-1">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-content-ink">
+            Welcome to Scrap Mitra
+          </h1>
+          <p className="text-xs sm:text-sm text-content-muted">
+            Vijayawada's trusted doorstep scrap recycling network
+          </p>
         </div>
-        <h1 className="font-display font-bold text-2xl sm:text-3xl text-content-ink">
-          Welcome to Scrap Mitra
-        </h1>
-        <p className="text-xs sm:text-sm text-content-muted">
-          Turn your household and business scrap into instant cash.
-        </p>
       </div>
 
       <Card className="p-6 border-border-line shadow-sm space-y-5">
@@ -62,7 +63,7 @@ export const PhoneAuthPage: React.FC = () => {
               <label htmlFor="phone" className="block text-xs font-semibold text-content-ink mb-1.5">
                 Mobile Number
               </label>
-              <div className="flex rounded-xl border border-border-line overflow-hidden focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all">
+              <div className="flex rounded-xl border border-border-line overflow-hidden focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all bg-surface-card">
                 <span className="bg-surface-bg px-3.5 py-3 text-sm font-semibold text-content-muted border-r border-border-line flex items-center gap-1">
                   🇮🇳 +91
                 </span>
@@ -77,14 +78,14 @@ export const PhoneAuthPage: React.FC = () => {
                     setPhoneNumber(e.target.value.replace(/\D/g, ''))
                     setError('')
                   }}
-                  className="flex-1 px-3.5 py-3 text-sm text-content-ink bg-white focus:outline-none"
+                  className="flex-1 px-3.5 py-3 text-sm text-content-ink bg-transparent focus:outline-none"
                   autoFocus
                 />
               </div>
               {error && <p className="text-xs text-status-error font-medium mt-1.5">{error}</p>}
             </div>
 
-            <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
+            <Button type="submit" variant="primary" className="w-full font-bold" isLoading={isLoading}>
               <span>Get Verification OTP</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Button>
@@ -118,13 +119,13 @@ export const PhoneAuthPage: React.FC = () => {
                   setOtp(e.target.value.replace(/\D/g, ''))
                   setError('')
                 }}
-                className="w-full text-center tracking-[0.5em] font-display font-bold text-2xl py-3 border border-border-line rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full text-center tracking-[0.5em] font-display font-bold text-2xl py-3 border border-border-line rounded-xl bg-surface-card focus:outline-none focus:ring-2 focus:ring-primary-green"
                 autoFocus
               />
               {error && <p className="text-xs text-status-error font-medium mt-1.5">{error}</p>}
             </div>
 
-            <Button type="submit" variant="primary" className="w-full" isLoading={isLoading}>
+            <Button type="submit" variant="primary" className="w-full font-bold" isLoading={isLoading}>
               Verify & Continue
             </Button>
           </form>

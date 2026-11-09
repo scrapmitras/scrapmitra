@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Phone, Mail, MapPin, Globe, Shield, LogOut, ChevronRight, CheckCircle2 } from 'lucide-react'
+import { Phone, Mail, MapPin, Globe, Shield, LogOut, ChevronRight, CheckCircle2, Sun, Moon } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { useTheme } from '@/hooks/useTheme'
 
 export const AccountPage: React.FC = () => {
   const [name, setName] = useState('Ravi Kumar')
   const [isEditing, setIsEditing] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <div className="space-y-6">
@@ -110,6 +112,30 @@ export const AccountPage: React.FC = () => {
             </div>
           </div>
           <Badge variant="outline">Default</Badge>
+        </Card>
+
+        {/* Dark Mode Preference Card */}
+        <Card
+          variant="interactive"
+          onClick={toggleTheme}
+          className="p-4 flex items-center justify-between cursor-pointer"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-secondary-green-soft text-primary-green flex items-center justify-center">
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-action-orange" /> : <Moon className="w-4 h-4" />}
+            </div>
+            <div>
+              <h4 className="font-display font-bold text-sm text-content-ink">
+                Appearance & Theme
+              </h4>
+              <p className="text-xs text-content-muted">
+                {theme === 'dark' ? 'Dark Mode Active' : 'Light Mode Active'} (Tap to switch)
+              </p>
+            </div>
+          </div>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-surface-bg border border-border-line text-content-ink">
+            {theme === 'dark' ? 'Dark' : 'Light'}
+          </span>
         </Card>
       </div>
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { X, User, MapPin, Tag, ShieldCheck, HelpCircle, FileText, LogOut, ChevronRight } from 'lucide-react'
+import { X, User, MapPin, Tag, ShieldCheck, HelpCircle, FileText, LogOut, ChevronRight, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/hooks/useTheme'
 
 interface DrawerProps {
   isOpen: boolean
@@ -8,6 +9,8 @@ interface DrawerProps {
 }
 
 export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
+  const { theme, toggleTheme } = useTheme()
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) onClose()
@@ -27,7 +30,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex md:hidden" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+    <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Navigation Menu">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-content-ink/40 backdrop-blur-xs transition-opacity duration-200"
@@ -35,7 +38,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
       />
 
       {/* Panel */}
-      <aside className="relative w-4/5 max-w-sm h-full bg-white shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200">
+      <aside className="relative w-4/5 max-w-sm h-full bg-surface-card shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200 border-r border-border-line">
         {/* Drawer Header */}
         <div className="p-5 border-b border-border-line flex items-center justify-between bg-surface-bg">
           <div className="flex items-center gap-3">
@@ -49,7 +52,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-white border border-border-line flex items-center justify-center text-content-muted hover:text-content-ink"
+            className="w-8 h-8 rounded-full bg-surface-card border border-border-line flex items-center justify-center text-content-muted hover:text-content-ink"
             aria-label="Close menu"
           >
             <X className="w-4 h-4" />
@@ -58,6 +61,24 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
 
         {/* Drawer Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-1">
+          {/* Dark Mode Switcher in Drawer */}
+          <button
+            onClick={toggleTheme}
+            className="w-full flex items-center justify-between p-3 rounded-xl bg-surface-bg border border-border-line text-sm font-semibold text-content-ink mb-3 transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-action-orange" />
+              ) : (
+                <Moon className="w-4 h-4 text-primary-green" />
+              )}
+              <span>Appearance Mode</span>
+            </div>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-surface-card border border-border-line text-content-muted">
+              {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+            </span>
+          </button>
+
           <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-content-muted">
             Customer Portal
           </div>

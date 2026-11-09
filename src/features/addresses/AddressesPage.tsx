@@ -110,7 +110,7 @@ export const AddressesPage: React.FC = () => {
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                     newLabel === lbl
                       ? 'bg-primary-green text-white border-primary-green'
-                      : 'bg-white text-content-muted border-border-line'
+                      : 'bg-surface-card text-content-muted border-border-line'
                   }`}
                 >
                   {lbl}
@@ -127,7 +127,7 @@ export const AddressesPage: React.FC = () => {
                 placeholder="e.g. 54-12/1, Patamata Main Road"
                 value={newLine1}
                 onChange={(e) => setNewLine1(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                 required
               />
             </div>
@@ -141,7 +141,7 @@ export const AddressesPage: React.FC = () => {
                 placeholder="e.g. Near Kanaka Durga Temple Arch"
                 value={newLandmark}
                 onChange={(e) => setNewLandmark(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
               />
             </div>
 

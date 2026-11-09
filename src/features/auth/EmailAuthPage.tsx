@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, Phone, ArrowRight } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
+import { ScrapAuth3D } from '@/components/3d/ScrapAuth3D'
 
 export const EmailAuthPage: React.FC = () => {
   const navigate = useNavigate()
@@ -27,14 +28,17 @@ export const EmailAuthPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto py-4 sm:py-8 space-y-6">
-      <div className="text-center space-y-2">
-        <h1 className="font-display font-bold text-2xl sm:text-3xl text-content-ink">
-          {isSignUp ? 'Create Scrap Mitra Account' : 'Sign In with Email'}
-        </h1>
-        <p className="text-xs sm:text-sm text-content-muted">
-          Manage your bookings, rate quotes, and payment history securely.
-        </p>
+    <div className="max-w-md mx-auto py-2 sm:py-6 space-y-4 sm:space-y-6">
+      <div className="relative rounded-3xl bg-linear-to-b from-secondary-green-soft/50 to-transparent p-2 border border-border-line/40">
+        <ScrapAuth3D />
+        <div className="text-center space-y-1 mt-1">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-content-ink">
+            {isSignUp ? 'Create Scrap Mitra Account' : 'Sign In with Email'}
+          </h1>
+          <p className="text-xs sm:text-sm text-content-muted">
+            Manage your scrap bookings, rate quotes, and payout history
+          </p>
+        </div>
       </div>
 
       <Card className="p-6 border-border-line shadow-sm space-y-5">
@@ -43,14 +47,14 @@ export const EmailAuthPage: React.FC = () => {
             <label className="block text-xs font-semibold text-content-ink mb-1.5">
               Email Address
             </label>
-            <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all">
+            <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all bg-surface-card">
               <Mail className="w-4 h-4 text-content-muted mr-2 flex-none" />
               <input
                 type="email"
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full text-sm bg-transparent focus:outline-none"
+                className="w-full text-sm bg-transparent text-content-ink focus:outline-none"
                 required
               />
             </div>
@@ -70,14 +74,14 @@ export const EmailAuthPage: React.FC = () => {
                 </Link>
               )}
             </div>
-            <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all">
+            <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green focus-within:border-transparent transition-all bg-surface-card">
               <Lock className="w-4 h-4 text-content-muted mr-2 flex-none" />
               <input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full text-sm bg-transparent focus:outline-none"
+                className="w-full text-sm bg-transparent text-content-ink focus:outline-none"
                 required
               />
             </div>
@@ -85,7 +89,7 @@ export const EmailAuthPage: React.FC = () => {
 
           {error && <p className="text-xs text-status-error font-medium">{error}</p>}
 
-          <Button type="submit" className="w-full" isLoading={isLoading}>
+          <Button type="submit" className="w-full font-bold" isLoading={isLoading}>
             <span>{isSignUp ? 'Sign Up' : 'Sign In'}</span>
             <ArrowRight className="w-4 h-4 ml-1.5" />
           </Button>
@@ -95,7 +99,7 @@ export const EmailAuthPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-xs text-primary-green font-semibold hover:underline"
+            className="text-xs text-primary-green font-semibold hover:underline cursor-pointer"
           >
             {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
           </button>

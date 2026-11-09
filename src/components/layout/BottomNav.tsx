@@ -27,7 +27,7 @@ export const BottomNav: React.FC = () => {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border-line px-2 py-1.5 shadow-[0_-4px_16px_rgba(0,0,0,0.04)]"
+      className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-surface-card/95 backdrop-blur-md border-t border-border-line px-2 py-1.5 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] transition-colors"
       style={{ paddingBottom: 'max(0.375rem, env(safe-area-inset-bottom, 0px))' }}
       aria-label="Mobile Navigation"
     >

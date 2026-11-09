@@ -80,7 +80,7 @@ export const SellItemPage: React.FC = () => {
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
                     category === c
                       ? 'bg-action-orange text-white border-action-orange shadow-xs'
-                      : 'bg-white text-content-muted border-border-line hover:border-action-orange'
+                      : 'bg-surface-card text-content-muted border-border-line hover:border-action-orange'
                   }`}
                 >
                   {c}
@@ -99,7 +99,7 @@ export const SellItemPage: React.FC = () => {
               placeholder="e.g., 5-Seater Teak Wood Sofa Set, Old Godrej Refrigerator"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm focus:outline-none focus:ring-2 focus:ring-action-orange"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-action-orange"
               required
             />
           </div>
@@ -155,7 +155,7 @@ export const SellItemPage: React.FC = () => {
               placeholder="Mention age, brand, working/non-working status, any visible damages, etc."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs focus:outline-none focus:ring-2 focus:ring-action-orange"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-action-orange"
             />
           </div>
 
@@ -167,14 +167,14 @@ export const SellItemPage: React.FC = () => {
               </label>
               <span className="text-[11px] text-content-muted">Leave blank for open quotation</span>
             </div>
-            <div className="flex items-center px-3.5 py-2.5 rounded-xl border border-border-line bg-white">
+            <div className="flex items-center px-3.5 py-2.5 rounded-xl border border-border-line bg-surface-card text-content-ink">
               <span className="text-xs font-semibold text-content-muted mr-1.5">₹</span>
               <input
                 type="number"
                 placeholder="e.g. 5000"
                 value={expectedPrice}
                 onChange={(e) => setExpectedPrice(e.target.value)}
-                className="w-full text-sm bg-transparent focus:outline-none"
+                className="w-full text-sm bg-transparent text-content-ink focus:outline-none"
               />
             </div>
           </div>
@@ -187,7 +187,7 @@ export const SellItemPage: React.FC = () => {
             <select
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-white focus:outline-none focus:ring-2 focus:ring-action-orange"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-action-orange"
             >
               <option value="addr-1">Home – 12-4, Gandhi Nagar 2nd Line, Vijayawada</option>
               <option value="addr-2">Shop – Shop #14, Main Road, Vijayawada</option>

@@ -8,11 +8,11 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', children, ...props }, ref) => {
     const variants = {
-      default: 'bg-white border border-border-line shadow-[0_2px_8px_rgba(16,37,31,0.04)]',
-      muted: 'bg-secondary-green-soft border border-border-line',
-      outline: 'bg-transparent border border-border-line',
+      default: 'bg-surface-card text-content-ink border border-border-line shadow-[0_2px_8px_rgba(0,0,0,0.04)]',
+      muted: 'bg-secondary-green-soft text-content-ink border border-border-line',
+      outline: 'bg-transparent text-content-ink border border-border-line',
       interactive:
-        'bg-white border border-border-line shadow-[0_2px_8px_rgba(16,37,31,0.04)] hover:shadow-[0_4px_16px_rgba(16,37,31,0.08)] hover:border-primary-green cursor-pointer transition-all duration-150',
+        'bg-surface-card text-content-ink border border-border-line shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:border-primary-green cursor-pointer transition-all duration-150',
     }
 
     return (
@@ -28,3 +28,4 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 )
 
 Card.displayName = 'Card'
+

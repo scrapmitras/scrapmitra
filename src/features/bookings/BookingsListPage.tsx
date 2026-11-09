@@ -116,7 +116,7 @@ export const BookingsListPage: React.FC = () => {
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
               filter === f.id
                 ? 'bg-primary-green text-white shadow-xs'
-                : 'bg-white text-content-muted border border-border-line hover:border-primary-green'
+                : 'bg-surface-card text-content-muted border border-border-line hover:border-primary-green'
             }`}
           >
             {f.label}
@@ -178,3 +178,4 @@ export const BookingsListPage: React.FC = () => {
     </div>
   )
 }
+

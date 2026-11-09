@@ -13,3 +13,4 @@ export function formatINR(amount: number): string {
     minimumFractionDigits: 2,
   }).format(amount)
 }
+

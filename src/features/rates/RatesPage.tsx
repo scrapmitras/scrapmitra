@@ -66,7 +66,7 @@ export const RatesPage: React.FC = () => {
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               selectedCat === cat.id
                 ? 'bg-primary-green text-white shadow-xs'
-                : 'bg-white text-content-muted border border-border-line hover:border-primary-green'
+                : 'bg-surface-card text-content-muted border border-border-line hover:border-primary-green'
             }`}
           >
             {cat.label}
@@ -75,7 +75,7 @@ export const RatesPage: React.FC = () => {
       </div>
 
       {/* Rates Table / List */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
         {filteredRates.map((item) => (
           <Card
             key={item.name}
@@ -125,7 +125,7 @@ export const RatesPage: React.FC = () => {
             <select
               value={calcRate}
               onChange={(e) => setCalcRate(Number(e.target.value))}
-              className="w-full bg-white border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
+              className="w-full bg-surface-card border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
             >
               {rates.map((r) => (
                 <option key={r.name} value={r.rate}>
@@ -145,7 +145,7 @@ export const RatesPage: React.FC = () => {
               max="5000"
               value={calcWeight}
               onChange={(e) => setCalcWeight(Math.max(1, Number(e.target.value)))}
-              className="w-full bg-white border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
+              className="w-full bg-surface-card border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
             />
           </div>
         </div>
@@ -168,3 +168,4 @@ export const RatesPage: React.FC = () => {
     </div>
   )
 }
+

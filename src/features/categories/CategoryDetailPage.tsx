@@ -88,7 +88,7 @@ export const CategoryDetailPage: React.FC = () => {
         <span>All Categories</span>
       </Link>
 
-      <div className="bg-white rounded-3xl p-5 border border-border-line">
+      <div className="bg-surface-card rounded-3xl p-5 border border-border-line">
         <h1 className="font-display font-bold text-2xl text-content-ink">
           {current.name}
         </h1>

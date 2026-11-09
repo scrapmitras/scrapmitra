@@ -137,7 +137,7 @@ export const BookScrapPage: React.FC = () => {
                   type="button"
                   onClick={() => updateScrapQty(item.id, -1)}
                   disabled={item.qty === 0}
-                  className="w-7 h-7 rounded-full bg-white shadow-xs flex items-center justify-center text-content-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-secondary-green-soft cursor-pointer transition-colors"
+                  className="w-7 h-7 rounded-full bg-surface-card shadow-xs flex items-center justify-center text-content-ink disabled:opacity-30 disabled:cursor-not-allowed hover:bg-secondary-green-soft cursor-pointer transition-colors"
                   aria-label={`Decrease ${item.name}`}
                 >
                   <Minus className="w-3.5 h-3.5" />
@@ -205,7 +205,7 @@ export const BookScrapPage: React.FC = () => {
                 {vehicles.map((v) => (
                   <div
                     key={v.id}
-                    className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-border-line"
+                    className="flex items-center justify-between p-2.5 bg-surface-card rounded-xl border border-border-line"
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-xl">{v.icon}</span>
@@ -217,12 +217,12 @@ export const BookScrapPage: React.FC = () => {
                         type="button"
                         onClick={() => updateVehQty(v.id, -1)}
                         disabled={v.qty === 0}
-                        className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-content-ink disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                        className="w-6 h-6 rounded-full bg-surface-card flex items-center justify-center text-content-ink disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                         aria-label={`Decrease ${v.name}`}
                       >
                         <Minus className="w-3 h-3" />
                       </button>
-                      <span className="w-6 text-center text-xs font-bold">{v.qty}</span>
+                      <span className="w-6 text-center text-xs font-bold text-content-ink">{v.qty}</span>
                       <button
                         type="button"
                         onClick={() => updateVehQty(v.id, 1)}
@@ -240,7 +240,7 @@ export const BookScrapPage: React.FC = () => {
 
           {/* Sticky Estimation & Continue Action Bar */}
           <div className="sticky bottom-16 md:bottom-4 z-20 pt-4">
-            <Card className="p-4 bg-white/95 backdrop-blur-md border-primary-green/30 shadow-lg flex items-center justify-between gap-4">
+            <Card className="p-4 bg-surface-card/95 backdrop-blur-md border-primary-green/30 shadow-lg flex items-center justify-between gap-4">
               <div>
                 <span className="text-xs text-content-muted block font-medium">
                   Estimated Payout
@@ -301,7 +301,7 @@ export const BookScrapPage: React.FC = () => {
             <label className="block text-xs font-semibold text-content-ink mb-1.5">
               Contact Number for Doorstep Partner *
             </label>
-            <div className="flex items-center rounded-xl border border-border-line overflow-hidden bg-white">
+            <div className="flex items-center rounded-xl border border-border-line overflow-hidden bg-surface-card">
               <span className="bg-surface-bg px-3.5 py-2.5 text-xs font-semibold text-content-muted border-r border-border-line">
                 +91
               </span>
@@ -310,7 +310,7 @@ export const BookScrapPage: React.FC = () => {
                 value={contactNumber}
                 onChange={(e) => setContactNumber(e.target.value.replace(/\D/g, ''))}
                 maxLength={10}
-                className="px-3 py-2.5 text-sm bg-transparent flex-1 focus:outline-none"
+                className="px-3 py-2.5 text-sm bg-transparent flex-1 focus:outline-none text-content-ink"
                 required
               />
             </div>
@@ -375,7 +375,7 @@ export const BookScrapPage: React.FC = () => {
                   className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                     selectedSlot === s.id
                       ? 'border-primary-green bg-secondary-green-soft text-primary-green ring-1 ring-primary-green'
-                      : 'border-border-line bg-white hover:border-primary-green'
+                      : 'border-border-line bg-surface-card hover:border-primary-green'
                   }`}
                 >
                   <div className="flex items-center gap-1.5 text-xs font-bold text-content-ink mb-0.5">
@@ -404,7 +404,7 @@ export const BookScrapPage: React.FC = () => {
               placeholder="e.g. Ring the bell on 2nd floor, keep scrap near gate."
               value={customerNote}
               onChange={(e) => setCustomerNote(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
             />
           </div>
 
@@ -438,3 +438,4 @@ export const BookScrapPage: React.FC = () => {
     </div>
   )
 }
+

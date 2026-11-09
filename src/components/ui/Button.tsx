@@ -29,9 +29,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       secondary:
         'bg-action-orange hover:bg-action-orange-hover text-white shadow-sm hover:shadow',
       outline:
-        'bg-white text-content-ink border border-border-line hover:bg-surface-bg',
+        'bg-surface-card text-content-ink border border-border-line hover:bg-surface-bg',
       danger:
-        'bg-white text-status-error border border-status-error hover:bg-status-error-soft',
+        'bg-surface-card text-status-error border border-status-error hover:bg-status-error-soft',
       ghost: 'bg-transparent text-content-ink hover:bg-secondary-green-soft',
     }
 
@@ -76,3 +76,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 
 Button.displayName = 'Button'
+

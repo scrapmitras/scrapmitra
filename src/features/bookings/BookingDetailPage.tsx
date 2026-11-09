@@ -110,7 +110,7 @@ export const BookingDetailPage: React.FC = () => {
 
           <a
             href="tel:+919876543210"
-            className="w-9 h-9 rounded-full bg-white border border-border-line flex items-center justify-center text-primary-green hover:bg-secondary-green-soft"
+            className="w-9 h-9 rounded-full bg-surface-card border border-border-line flex items-center justify-center text-primary-green hover:bg-secondary-green-soft"
             aria-label="Call partner"
           >
             <Phone className="w-4 h-4" />
@@ -188,7 +188,7 @@ export const BookingDetailPage: React.FC = () => {
             className="fixed inset-0 bg-content-ink/40 backdrop-blur-xs"
             onClick={() => setShowCancelModal(false)}
           />
-          <div className="relative bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl z-10 space-y-4">
+          <div className="relative bg-surface-card rounded-3xl p-6 max-w-md w-full shadow-2xl z-10 space-y-4 border border-border-line">
             <div className="flex items-center justify-between">
               <h3 className="font-display font-bold text-lg text-content-ink">
                 Cancel Pickup Booking
@@ -220,7 +220,7 @@ export const BookingDetailPage: React.FC = () => {
                   className={`w-full p-3 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${
                     cancelReason === r
                       ? 'border-primary-green bg-secondary-green-soft text-primary-green'
-                      : 'border-border-line bg-white text-content-ink hover:border-primary-green'
+                      : 'border-border-line bg-surface-card text-content-ink hover:border-primary-green'
                   }`}
                 >
                   {r}
@@ -234,7 +234,7 @@ export const BookingDetailPage: React.FC = () => {
                 placeholder="Please describe your reason..."
                 value={otherReason}
                 onChange={(e) => setOtherReason(e.target.value)}
-                className="w-full p-3 rounded-xl border border-border-line text-xs focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full p-3 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
               />
             )}
 

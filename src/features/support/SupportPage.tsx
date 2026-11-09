@@ -89,7 +89,7 @@ export const SupportPage: React.FC = () => {
                 placeholder="e.g. SM-2026-0001042"
                 value={bookingRef}
                 onChange={(e) => setBookingRef(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
               />
             </div>
 
@@ -102,7 +102,7 @@ export const SupportPage: React.FC = () => {
                 placeholder="e.g. Collector delay, Weighing query, Change slot"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                 required
               />
             </div>
@@ -116,7 +116,7 @@ export const SupportPage: React.FC = () => {
                 placeholder="Please describe how we can assist you..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-xs bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                 required
               />
             </div>

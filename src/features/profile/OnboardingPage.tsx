@@ -69,7 +69,7 @@ export const OnboardingPage: React.FC = () => {
                 className={`py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                   language === 'en'
                     ? 'border-primary-green bg-secondary-green-soft text-primary-green'
-                    : 'border-border-line bg-white text-content-muted'
+                    : 'border-border-line bg-surface-card text-content-muted'
                 }`}
               >
                 English
@@ -80,7 +80,7 @@ export const OnboardingPage: React.FC = () => {
                 className={`py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                   language === 'te'
                     ? 'border-primary-green bg-secondary-green-soft text-primary-green'
-                    : 'border-border-line bg-white text-content-muted'
+                    : 'border-border-line bg-surface-card text-content-muted'
                 }`}
               >
                 తెలుగు (Telugu)
@@ -104,7 +104,7 @@ export const OnboardingPage: React.FC = () => {
                   placeholder="e.g., Door No. 12-4, Gandhi Nagar 2nd Line"
                   value={addressLine}
                   onChange={(e) => setAddressLine(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                   required
                 />
               </div>
@@ -119,7 +119,7 @@ export const OnboardingPage: React.FC = () => {
                     placeholder="e.g., Benz Circle"
                     value={locality}
                     onChange={(e) => setLocality(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                   />
                 </div>
                 <div>
@@ -131,7 +131,7 @@ export const OnboardingPage: React.FC = () => {
                     placeholder="e.g., Near Apollo Pharmacy"
                     value={landmark}
                     onChange={(e) => setLandmark(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary-green"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-border-line text-sm bg-surface-card text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
                   />
                 </div>
               </div>

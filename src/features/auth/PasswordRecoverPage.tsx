@@ -44,14 +44,14 @@ export const PasswordRecoverPage: React.FC = () => {
               <label className="block text-xs font-semibold text-content-ink mb-1.5">
                 Registered Email
               </label>
-              <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green">
+              <div className="flex items-center px-3.5 py-3 rounded-xl border border-border-line focus-within:ring-2 focus-within:ring-primary-green bg-surface-card">
                 <Mail className="w-4 h-4 text-content-muted mr-2 flex-none" />
                 <input
                   type="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full text-sm bg-transparent focus:outline-none"
+                  className="w-full text-sm bg-transparent text-content-ink focus:outline-none"
                   required
                 />
               </div>
@@ -81,3 +81,4 @@ export const PasswordRecoverPage: React.FC = () => {
     </div>
   )
 }
+

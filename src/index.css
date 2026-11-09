@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-green: #174B3A;
+  --color-primary-green-deep: #0e3528;
+  --color-secondary-green: #2F7658;
+  --color-secondary-green-soft: #eaf3ee;
+  --color-action-orange: #E87524;
+  --color-action-orange-hover: #cf6418;
+  --color-action-orange-soft: #fef3e9;
+  --color-surface-bg: #F7F8F5;
+  --color-surface-card: #FFFFFF;
+  --color-content-ink: #17231E;
+  --color-content-muted: #68756E;
+  --color-border-line: #E1E8E3;
+  --color-status-error: #c5221f;
+  --color-status-error-soft: #fde8e8;
+  --color-status-success: #137333;
+  --color-status-success-soft: #e6f4ea;
+  --color-status-warning: #b06000;
+  --color-status-warning-soft: #fef7e0;
+  --font-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-surface-bg);
+  color: var(--color-content-ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+/* Scrollbars & tap states */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-line);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-content-muted);
+}

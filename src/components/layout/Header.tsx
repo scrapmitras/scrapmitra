@@ -12,7 +12,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   const navigate = useNavigate()
   const { theme, toggleTheme } = useTheme()
 
-  // Determine if current route is a sub-page that needs a back button
   const isRootTab =
     location.pathname === '/' ||
     location.pathname === '/categories' ||
@@ -26,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
     if (path.startsWith('/categories/')) return 'Category Items'
     if (path === '/rates') return 'Today\'s Rates'
     if (path === '/book/scrap') return 'Select Scrap'
-    if (path === '/sell-item') return 'Sell an Item'
+    if (path === '/sell-item') return 'Sell Heavy Item'
     if (path === '/bookings') return 'My Bookings'
     if (path.startsWith('/bookings/')) return 'Booking Details'
     if (path.startsWith('/sell-requests/')) return 'Sell Request'
@@ -42,14 +41,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   }
 
   return (
-    <header className="sticky top-0 z-30 bg-surface-card/90 backdrop-blur-md border-b border-border-line px-4 py-3 sm:px-6 transition-colors">
+    <header className="sticky top-0 z-30 glass-panel border-b border-border-line px-4 py-3 sm:px-6 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         {/* Left side: Back button or Logo */}
         <div className="flex items-center gap-3 min-w-0">
           {!isRootTab ? (
             <button
               onClick={() => navigate(-1)}
-              className="w-9 h-9 rounded-full bg-surface-bg flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-full glass-pill flex items-center justify-center text-content-ink hover:text-primary-green transition-all cursor-pointer active:scale-95 shadow-xs"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -57,15 +56,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           ) : (
             <button
               onClick={onOpenDrawer}
-              className="lg:hidden w-9 h-9 rounded-full bg-surface-bg flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
+              className="lg:hidden w-9 h-9 rounded-full glass-pill flex items-center justify-center text-content-ink hover:text-primary-green transition-all cursor-pointer active:scale-95 shadow-xs"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5 text-primary-green" />
             </button>
           )}
 
-          <Link to="/" className="flex items-center gap-2 group min-w-0">
-            <span className="w-9 h-9 rounded-xl bg-primary-green text-white flex items-center justify-center font-bold text-lg shadow-sm flex-none">
+          <Link to="/" className="flex items-center gap-2.5 group min-w-0">
+            <span className="w-9 h-9 rounded-xl bg-linear-to-br from-primary-green to-secondary-green text-white flex items-center justify-center font-bold text-lg shadow-md flex-none group-hover:scale-105 transition-transform">
               ♻
             </span>
             <div className="min-w-0">
@@ -128,30 +127,30 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           </Link>
         </nav>
 
-        {/* Right side: Location, Dark Mode Toggle & User controls */}
+        {/* Right side: Location, Theme Toggle & User controls */}
         <div className="flex items-center gap-2 sm:gap-3 flex-none">
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-bg border border-border-line text-xs font-medium text-content-ink">
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-pill text-xs font-semibold text-content-ink">
             <MapPin className="w-3.5 h-3.5 text-primary-green flex-none" />
             <span className="truncate max-w-[120px]">Vijayawada</span>
           </div>
 
-          {/* Dark / Light Mode Toggle Button */}
+          {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-full bg-surface-bg border border-border-line flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full glass-pill flex items-center justify-center text-content-ink hover:text-action-orange transition-all cursor-pointer active:scale-95 shadow-xs"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-action-orange" />
+              <Sun className="w-4 h-4 text-action-orange animate-in spin-in-90 duration-200" />
             ) : (
-              <Moon className="w-4 h-4 text-primary-green" />
+              <Moon className="w-4 h-4 text-primary-green animate-in spin-in-90 duration-200" />
             )}
           </button>
 
           <Link
             to="/notifications"
-            className="w-9 h-9 rounded-full bg-surface-bg border border-border-line flex items-center justify-center text-content-ink hover:bg-secondary-green-soft transition-colors relative"
+            className="w-9 h-9 rounded-full glass-pill flex items-center justify-center text-content-ink hover:text-primary-green transition-all relative active:scale-95 shadow-xs"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4 text-content-muted" />
@@ -160,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
 
           <Link
             to="/account"
-            className="w-9 h-9 rounded-full bg-primary-green text-white flex items-center justify-center font-bold text-sm shadow-sm hover:bg-primary-green-deep transition-colors"
+            className="w-9 h-9 rounded-full bg-linear-to-br from-primary-green to-secondary-green text-white flex items-center justify-center font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition-all"
             aria-label="My Account"
           >
             <User className="w-4 h-4" />

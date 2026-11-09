@@ -31,10 +31,10 @@
   --action-orange: #E87524;
   --action-orange-hover: #cf6418;
   --action-orange-soft: #fef3e9;
-  --surface-bg: #F7F8F5;
+  --surface-bg: #F5F7F4;
   --surface-card: #FFFFFF;
-  --content-ink: #17231E;
-  --content-muted: #68756E;
+  --content-ink: #14201A;
+  --content-muted: #64736C;
   --border-line: #E1E8E3;
   --status-error: #c5221f;
   --status-error-soft: #fde8e8;
@@ -42,6 +42,9 @@
   --status-success-soft: #e6f4ea;
   --status-warning: #b06000;
   --status-warning-soft: #fef7e0;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(16, 37, 31, 0.06);
   color-scheme: light;
 }
 
@@ -53,8 +56,8 @@
   --action-orange: #fb923c;
   --action-orange-hover: #f97316;
   --action-orange-soft: #382012;
-  --surface-bg: #0c1511;
-  --surface-card: #14231c;
+  --surface-bg: #0b1410;
+  --surface-card: #13221b;
   --content-ink: #f0f7f3;
   --content-muted: #9ab0a4;
   --border-line: #22372c;
@@ -64,6 +67,9 @@
   --status-success-soft: #142e23;
   --status-warning: #fbbf24;
   --status-warning-soft: #31260e;
+  --glass-bg: rgba(19, 34, 27, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
 
@@ -73,12 +79,57 @@ body {
   background-color: var(--color-surface-bg);
   color: var(--color-content-ink);
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(47, 118, 88, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(232, 117, 36, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(52, 211, 153, 0.07) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(251, 146, 60, 0.05) 0px, transparent 50%);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.018em;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-pill {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Micro-animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
 }
 
 /* Scrollbars & tap states */

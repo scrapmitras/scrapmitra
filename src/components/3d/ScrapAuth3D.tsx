@@ -90,6 +90,26 @@ export const ScrapAuth3D: React.FC<ScrapAuth3DProps> = ({ className = '' }) => {
     const sphere = new THREE.Mesh(sphereGeo, sphereMat)
     rootGroup.add(sphere)
 
+    let mouseX = 0
+    let mouseY = 0
+
+    const handlePointerMove = (e: MouseEvent) => {
+      const rect = mount.getBoundingClientRect()
+      mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1)
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = mount.getBoundingClientRect()
+        mouseX = ((e.touches[0].clientX - rect.left) / rect.width) * 2 - 1
+        mouseY = -(((e.touches[0].clientY - rect.top) / rect.height) * 2 - 1)
+      }
+    }
+
+    mount.addEventListener('mousemove', handlePointerMove)
+    mount.addEventListener('touchmove', handleTouchMove, { passive: true })
+
     let animId: number
     const clock = new THREE.Clock()
 
@@ -97,8 +117,11 @@ export const ScrapAuth3D: React.FC<ScrapAuth3DProps> = ({ className = '' }) => {
       animId = requestAnimationFrame(animate)
       const t = clock.getElapsedTime()
 
+      rootGroup.rotation.y = t * 0.5 + mouseX * 0.6
+      rootGroup.rotation.x = mouseY * 0.4
+
       ring.rotation.x = Math.sin(t * 0.8) * 0.3
-      ring.rotation.y = t * 0.6
+      ring.rotation.z = Math.cos(t * 0.6) * 0.2
 
       core.rotation.x = t * 0.9
       core.rotation.y = t * 1.1
@@ -131,6 +154,8 @@ export const ScrapAuth3D: React.FC<ScrapAuth3DProps> = ({ className = '' }) => {
     window.addEventListener('resize', handleResize)
 
     return () => {
+      mount.removeEventListener('mousemove', handlePointerMove)
+      mount.removeEventListener('touchmove', handleTouchMove)
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animId)
       renderer.dispose()

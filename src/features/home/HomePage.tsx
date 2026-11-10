@@ -48,7 +48,7 @@ export const HomePage: React.FC = () => {
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 py-8 sm:py-12 lg:py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Column: Heading, Value Props & CTAs */}
-            <div className="lg:col-span-6 xl:col-span-7 space-y-5">
+            <div className="lg:col-span-6 xl:col-span-6 space-y-5">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-action-orange text-white shadow-xs">
                   <Zap className="w-3.5 h-3.5 fill-current" />
@@ -102,10 +102,8 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Right Column: 3D Realistic Scrap Truck & Pop-Out Reveal Scene */}
-            <div className="lg:col-span-6 xl:col-span-5 relative flex items-center justify-center">
-              <div className="w-full relative rounded-3xl bg-black/25 backdrop-blur-md border border-white/15 p-2 overflow-hidden shadow-2xl">
-                <ScrapHero3D />
-              </div>
+            <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center">
+              <ScrapHero3D />
             </div>
           </div>
         </div>

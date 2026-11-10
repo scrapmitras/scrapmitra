@@ -124,6 +124,39 @@ h1, h2, h3, h4, h5, h6 {
   50% { opacity: 0.85; transform: scale(1.03); }
 }
 
+@keyframes truckDriveOut {
+  0% {
+    transform: perspective(1200px) translate3d(0, 35px, -320px) scale(0.68) rotateY(15deg);
+    opacity: 0.25;
+    filter: brightness(0.7) blur(2px);
+  }
+  65% {
+    transform: perspective(1200px) translate3d(0, -6px, 35px) scale(1.05) rotateY(2deg);
+    opacity: 1;
+    filter: brightness(1.1) blur(0px);
+  }
+  85% {
+    transform: perspective(1200px) translate3d(0, 3px, -8px) scale(0.99) rotateY(-1deg);
+  }
+  100% {
+    transform: perspective(1200px) translate3d(0, 0, 0) scale(1) rotateY(0deg);
+    opacity: 1;
+    filter: brightness(1) blur(0px);
+  }
+}
+
+.animate-truck-drive-out {
+  animation: truckDriveOut 1.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }

@@ -4,9 +4,16 @@ import { ArrowLeft, CheckCircle2 } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { useScrapRates } from '@/hooks/useScrapRates'
 
 export const CategoryDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
+  const { rates: liveRates } = useScrapRates()
+
+  const getDynamicRate = (itemName: string, fallbackRate: string) => {
+    const found = liveRates.find((r) => r.name.toLowerCase().includes(itemName.toLowerCase()) || itemName.toLowerCase().includes(r.name.toLowerCase()))
+    return found ? `₹${found.rate}` : fallbackRate
+  }
 
   const categoryDetails: Record<
     string,
@@ -113,7 +120,7 @@ export const CategoryDetailPage: React.FC = () => {
             </div>
             <div className="text-right flex-none">
               <div className="font-display font-bold text-base text-primary-green">
-                {item.rate}
+                {getDynamicRate(item.name, item.rate)}
                 {item.unit !== 'piece' && <span className="text-xs font-normal text-content-muted">/{item.unit}</span>}
               </div>
               {item.inspection && (

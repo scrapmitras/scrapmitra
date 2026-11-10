@@ -18,10 +18,11 @@ export const BottomNav: React.FC = () => {
     return location.pathname.startsWith(path)
   }
 
-  // Hide bottom nav on specific sub-flows (e.g. auth or onboarding)
+  // Hide bottom nav on specific sub-flows (e.g. auth, onboarding, or admin panel)
   const hideBottomNav =
     location.pathname.startsWith('/auth/') ||
-    location.pathname === '/onboarding'
+    location.pathname === '/onboarding' ||
+    location.pathname.startsWith('/admin')
 
   if (hideBottomNav) return null
 

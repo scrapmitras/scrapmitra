@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Bell, MapPin, User, Menu, Sun, Moon, Search, Headphones } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
+import { useAuth } from '@/app/auth-context'
 
 interface HeaderProps {
   onOpenDrawer?: () => void
@@ -11,9 +12,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const { theme, toggleTheme } = useTheme()
+  const { profile, isLoggedIn, isAdmin } = useAuth()
 
   const isRootTab =
     location.pathname === '/' ||
+    location.pathname === '/dashboard' ||
+    location.pathname === '/admin' ||
     location.pathname === '/categories' ||
     location.pathname === '/rates' ||
     location.pathname === '/bookings'
@@ -21,6 +25,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
   const getPageTitle = () => {
     const path = location.pathname
     if (path === '/') return 'Scrap Mitra'
+    if (path === '/dashboard') return 'My Dashboard'
+    if (path === '/admin') return 'Admin Portal'
+    if (path === '/admin/login') return 'Admin Sign In'
     if (path === '/categories') return 'Categories'
     if (path.startsWith('/categories/')) return 'Category Items'
     if (path === '/rates') return 'Today\'s Rates'
@@ -40,16 +47,36 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
     return 'Scrap Mitra'
   }
 
-  const navLinks = [
+  const isAdminRoute = location.pathname.startsWith('/admin')
+
+  const adminNavLinks = [
+    { label: 'Scrap Rates Desk', path: '/admin?tab=rates', isSpecial: true },
+    { label: 'Customer Orders', path: '/admin?tab=orders' },
+    { label: 'Accounts & Costs', path: '/admin?tab=accounts' },
+    { label: 'Customer Queries', path: '/admin?tab=support' },
+  ]
+
+  const customerNavLinks = [
     { label: 'Home', path: '/' },
+    ...(isLoggedIn ? [{ label: 'Dashboard', path: '/dashboard' }] : []),
+    ...(isAdmin ? [{ label: 'Owner Portal', path: '/admin', isSpecial: true }] : []),
     { label: 'Categories', path: '/categories' },
     { label: 'Today\'s Rates', path: '/rates' },
     { label: 'Book Pickup', path: '/book/scrap' },
     { label: 'Sell Heavy Item', path: '/sell-item', isSpecial: true },
-    { label: 'My Bookings', path: '/bookings' },
   ]
 
+  const navLinks = isAdminRoute ? adminNavLinks : customerNavLinks
+
   const isLinkActive = (path: string) => {
+    if (path.includes('?tab=')) {
+      const searchTab = new URLSearchParams(location.search).get('tab')
+      const targetTab = new URLSearchParams(path.split('?')[1]).get('tab')
+      return location.pathname === '/admin' && (searchTab === targetTab || (!searchTab && targetTab === 'accounts'))
+    }
+    if (path === '/admin') {
+      return location.pathname === '/admin' && !location.search
+    }
     if (path === '/') return location.pathname === '/'
     return location.pathname.startsWith(path)
   }
@@ -134,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
                   <span className={`text-[9px] uppercase tracking-wider px-1.5 py-0.2 rounded-full font-extrabold ${
                     active ? 'bg-white/20 text-white' : 'bg-action-orange/15 text-action-orange'
                   }`}>
-                    Fast Quote
+                    {tab.label.includes('Accounts') ? 'P&L' : 'Owner'}
                   </span>
                 )}
               </Link>
@@ -142,18 +169,28 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           })}
         </nav>
 
-        {/* Quick Rate Search Capsule (Large Desktop) */}
-        <Link
-          to="/rates"
-          className="hidden 2xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-card/60 dark:bg-white/5 border border-border-line text-content-muted hover:text-content-ink text-xs font-semibold transition-all hover:border-primary-green/50 shadow-2xs group"
-          title="Search today's scrap rates"
-        >
-          <Search className="w-3.5 h-3.5 text-primary-green group-hover:scale-110 transition-transform" />
-          <span>Check rates (Copper, Iron)...</span>
-          <kbd className="text-[10px] bg-surface-bg dark:bg-white/10 px-1.5 py-0.5 rounded border border-border-line font-mono text-content-muted">
-            /rates
-          </kbd>
-        </Link>
+        {/* Quick Route Capsule (Large Desktop) */}
+        {isAdminRoute ? (
+          <Link
+            to="/"
+            className="hidden 2xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold transition-all hover:bg-slate-700 shadow-2xs"
+            title="Open customer view"
+          >
+            <span>Customer View ↗</span>
+          </Link>
+        ) : (
+          <Link
+            to="/rates"
+            className="hidden 2xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-card/60 dark:bg-white/5 border border-border-line text-content-muted hover:text-content-ink text-xs font-semibold transition-all hover:border-primary-green/50 shadow-2xs group"
+            title="Search today's scrap rates"
+          >
+            <Search className="w-3.5 h-3.5 text-primary-green group-hover:scale-110 transition-transform" />
+            <span>Check rates (Copper, Iron)...</span>
+            <kbd className="text-[10px] bg-surface-bg dark:bg-white/10 px-1.5 py-0.5 rounded border border-border-line font-mono text-content-muted">
+              /rates
+            </kbd>
+          </Link>
+        )}
 
         {/* Right Controls: Location, Support, Theme Switcher & Profile */}
         <div className="flex items-center gap-2 sm:gap-2.5 flex-none">
@@ -205,15 +242,29 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface-card" />
           </Link>
 
-          {/* User Account Avatar */}
-          <Link
-            to="/account"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-primary-green to-secondary-green text-white flex items-center justify-center font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition-all ring-2 ring-primary-green/20"
-            aria-label="My Account"
-            title="My Account"
-          >
-            <User className="w-4 h-4" />
-          </Link>
+          {/* User Account / Login Button */}
+          {isLoggedIn && profile ? (
+            <Link
+              to="/dashboard"
+              className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full bg-gradient-to-r from-primary-green to-emerald-600 text-white font-bold text-xs shadow-md hover:scale-105 active:scale-95 transition-all ring-2 ring-primary-green/20"
+              title={`Dashboard (${profile.display_name || 'Account'})`}
+            >
+              <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center font-bold text-[11px]">
+                {(profile.display_name || 'U').charAt(0).toUpperCase()}
+              </div>
+              <span className="hidden sm:inline-block max-w-[100px] truncate">
+                {(profile.display_name || 'User').split(' ')[0]}
+              </span>
+            </Link>
+          ) : (
+            <Link
+              to="/auth/email"
+              className="px-3.5 py-1.5 rounded-full bg-primary-green text-white font-bold text-xs shadow-sm hover:bg-primary-green-deep active:scale-95 transition-all flex items-center gap-1.5"
+            >
+              <User className="w-3.5 h-3.5" />
+              <span>Sign In</span>
+            </Link>
+          )}
         </div>
       </div>
     </header>

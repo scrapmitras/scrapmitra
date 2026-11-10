@@ -1,59 +1,59 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Info, Calculator, ArrowRight } from 'lucide-react'
+import { Info, Calculator, ArrowRight, RefreshCw } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { formatINR } from '@/lib/utils'
+import { useScrapRates } from '@/hooks/useScrapRates'
 
 export const RatesPage: React.FC = () => {
+  const { rates, isLoading, refetch } = useScrapRates()
   const [selectedCat, setSelectedCat] = useState('all')
   const [calcWeight, setCalcWeight] = useState<number>(20)
   const [calcRate, setCalcRate] = useState<number>(14)
-
-  const rates = [
-    { name: 'Newspaper', category: 'paper', rate: 14, unit: 'kg', icon: '📰' },
-    { name: 'Cardboard / Cartons', category: 'paper', rate: 12, unit: 'kg', icon: '📦' },
-    { name: 'Office White Paper', category: 'paper', rate: 16, unit: 'kg', icon: '📄' },
-    { name: 'Books & Notebooks', category: 'paper', rate: 10, unit: 'kg', icon: '📚' },
-    { name: 'Plastic Bottles (PET)', category: 'plastic', rate: 10, unit: 'kg', icon: '🧴' },
-    { name: 'Hard Plastic Containers', category: 'plastic', rate: 8, unit: 'kg', icon: '🪣' },
-    { name: 'Iron Scrap (Heavy)', category: 'metal', rate: 28, unit: 'kg', icon: '🔩' },
-    { name: 'Tin Cans & Light Iron', category: 'metal', rate: 15, unit: 'kg', icon: '🥫' },
-    { name: 'Copper Wires', category: 'metal', rate: 520, unit: 'kg', icon: '🔌' },
-    { name: 'Brass / Bronze', category: 'metal', rate: 340, unit: 'kg', icon: '🪔' },
-    { name: 'Aluminium Scrap', category: 'metal', rate: 100, unit: 'kg', icon: '🥘' },
-    { name: 'E-Waste / Cables', category: 'ewaste', rate: 18, unit: 'kg', icon: '💻' },
-  ]
 
   const categories = [
     { id: 'all', label: 'All Items' },
     { id: 'paper', label: 'Paper' },
     { id: 'plastic', label: 'Plastics' },
     { id: 'metal', label: 'Metals' },
+    { id: 'appliances', label: 'Appliances' },
     { id: 'ewaste', label: 'E-Waste' },
   ]
 
-  const filteredRates = selectedCat === 'all'
-    ? rates
-    : rates.filter((r) => r.category === selectedCat)
+  const filteredRates =
+    selectedCat === 'all'
+      ? rates
+      : rates.filter((r) => r.category === selectedCat)
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display font-bold text-2xl text-content-ink">
-          Today's Scrap Rates
-        </h1>
-        <p className="text-sm text-content-muted">
-          Transparent market-benchmarked scrap rates in Vijayawada (Updated daily at 8:00 AM IST).
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 className="font-display font-bold text-2xl text-content-ink">
+            Today's Live Scrap Rates
+          </h1>
+          <p className="text-sm text-content-muted">
+            Transparent market-benchmarked scrap rates in Vijayawada (Updated live from pricing desk).
+          </p>
+        </div>
+
+        <button
+          onClick={refetch}
+          className="self-start sm:self-auto px-3 py-1.5 rounded-xl border border-border-line text-xs font-semibold text-content-muted hover:text-content-ink flex items-center gap-1.5 cursor-pointer bg-surface-card"
+          title="Refresh rates"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+          <span>Sync Rates</span>
+        </button>
       </div>
 
       {/* Indicative Rates Disclaimer Alert */}
       <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-secondary-green-soft border border-border-line text-xs text-content-ink">
         <Info className="w-4 h-4 text-primary-green flex-none mt-0.5" />
         <p>
-          <strong className="font-semibold text-primary-green">Important Note:</strong> Rates displayed are indicative. Final payout is determined after physical inspection and certified digital weighing at your doorstep.
+          <strong className="font-semibold text-primary-green">Real-time Benchmark:</strong> Rates displayed reflect the current live pricing desk index. Final payout is confirmed via certified digital weighing at your doorstep.
         </p>
       </div>
 
@@ -78,14 +78,14 @@ export const RatesPage: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3.5">
         {filteredRates.map((item) => (
           <Card
-            key={item.name}
-            className="flex items-center justify-between p-3.5 hover:border-primary-green transition-colors cursor-pointer"
+            key={item.id || item.name}
+            className="flex items-center justify-between p-3.5 hover:border-primary-green transition-colors cursor-pointer group"
             onClick={() => {
               setCalcRate(item.rate)
             }}
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl">{item.icon}</span>
+              <span className="text-2xl group-hover:scale-110 transition-transform">{item.icon}</span>
               <div>
                 <h4 className="font-display font-bold text-sm text-content-ink">
                   {item.name}
@@ -96,10 +96,10 @@ export const RatesPage: React.FC = () => {
               </div>
             </div>
             <div className="text-right">
-              <span className="font-display font-bold text-base text-primary-green">
+              <span className="font-display font-black text-base text-primary-green">
                 ₹{item.rate}
               </span>
-              <span className="text-xs text-content-muted">/{item.unit}</span>
+              <span className="text-xs text-content-muted font-medium">/{item.unit}</span>
             </div>
           </Card>
         ))}
@@ -120,7 +120,7 @@ export const RatesPage: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-content-muted mb-1.5">
-              Select Material & Rate (₹/kg)
+              Select Material & Rate
             </label>
             <select
               value={calcRate}
@@ -128,8 +128,8 @@ export const RatesPage: React.FC = () => {
               className="w-full bg-surface-card border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
             >
               {rates.map((r) => (
-                <option key={r.name} value={r.rate}>
-                  {r.name} – ₹{r.rate}/kg
+                <option key={r.id || r.name} value={r.rate}>
+                  {r.name} – ₹{r.rate}/{r.unit}
                 </option>
               ))}
             </select>
@@ -137,12 +137,12 @@ export const RatesPage: React.FC = () => {
 
           <div>
             <label className="block text-xs font-semibold text-content-muted mb-1.5">
-              Estimated Weight (kg)
+              Estimated Quantity
             </label>
             <input
               type="number"
-              min="1"
-              max="5000"
+              min={1}
+              max={1000}
               value={calcWeight}
               onChange={(e) => setCalcWeight(Math.max(1, Number(e.target.value)))}
               className="w-full bg-surface-card border border-border-line rounded-xl px-3 py-2 text-sm text-content-ink focus:outline-none focus:ring-2 focus:ring-primary-green"
@@ -150,16 +150,17 @@ export const RatesPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-border-line">
+        <div className="pt-2 border-t border-border-line flex items-center justify-between">
           <div>
-            <span className="text-xs text-content-muted block">Estimated Payout</span>
-            <span className="font-display font-bold text-2xl text-primary-green">
+            <span className="text-xs text-content-muted block">Estimated Cash in Hand</span>
+            <span className="font-display font-black text-2xl text-primary-green">
               {formatINR(calcWeight * calcRate)}
             </span>
           </div>
+
           <Link to="/book/scrap">
-            <Button size="sm" className="gap-1.5">
-              <span>Book Pickup</span>
+            <Button size="sm" className="font-bold flex items-center gap-1.5">
+              <span>Book Doorstep Pickup</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
@@ -168,4 +169,3 @@ export const RatesPage: React.FC = () => {
     </div>
   )
 }
-

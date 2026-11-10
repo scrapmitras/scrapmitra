@@ -1,20 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Recycle, Armchair, ChevronRight, ShieldCheck, Scale, Clock, Truck, Zap, CheckCircle2 } from 'lucide-react'
+import { Recycle, Armchair, ChevronRight, ShieldCheck, Scale, Clock, Zap, CheckCircle2, Truck } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { ScrapHero3D } from '@/components/3d/ScrapHero3D'
+import { useScrapRates } from '@/hooks/useScrapRates'
 
 export const HomePage: React.FC = () => {
-  const quickRates = [
-    { name: 'Newspaper', rate: '₹14/kg', icon: '📰', cat: 'Paper' },
-    { name: 'Cardboard', rate: '₹12/kg', icon: '📦', cat: 'Paper' },
-    { name: 'Plastic', rate: '₹10/kg', icon: '🧴', cat: 'Plastic' },
-    { name: 'Iron', rate: '₹28/kg', icon: '🔩', cat: 'Metals' },
-    { name: 'Aluminium', rate: '₹100/kg', icon: '🥫', cat: 'Metals' },
-    { name: 'Copper', rate: '₹520/kg', icon: '🔌', cat: 'Metals' },
-  ]
+  const { rates } = useScrapRates()
+
+  const quickRates = rates.slice(0, 6).map((item) => ({
+    name: item.name,
+    rate: `₹${item.rate}/${item.unit}`,
+    icon: item.icon,
+    cat: item.category,
+  }))
 
   const howItWorks = [
     {

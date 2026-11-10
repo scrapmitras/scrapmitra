@@ -19,6 +19,9 @@ import { QuotationDetailPage } from '@/features/quotations/QuotationDetailPage'
 import { PaymentsPage } from '@/features/payments/PaymentsPage'
 import { NotificationsPage } from '@/features/notifications/NotificationsPage'
 import { SupportPage } from '@/features/support/SupportPage'
+import { DashboardPage } from '@/features/dashboard/DashboardPage'
+import { AdminPortalPage } from '@/features/admin/AdminPortalPage'
+import { AdminLoginPage } from '@/features/admin/AdminLoginPage'
 import { NotFoundPage } from '@/features/common/NotFoundPage'
 
 export const router = createBrowserRouter([
@@ -34,6 +37,9 @@ export const router = createBrowserRouter([
       { path: 'auth/email', element: <EmailAuthPage /> },
       { path: 'auth/recover', element: <PasswordRecoverPage /> },
       { path: 'onboarding', element: <OnboardingPage /> },
+      { path: 'dashboard', element: <DashboardPage /> },
+      { path: 'admin', element: <AdminPortalPage /> },
+      { path: 'admin/login', element: <AdminLoginPage /> },
       { path: 'account', element: <AccountPage /> },
       { path: 'account/addresses', element: <AddressesPage /> },
       { path: 'book/scrap', element: <BookScrapPage /> },

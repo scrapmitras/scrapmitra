@@ -145,8 +145,75 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.animate-truck-drive-out {
-  animation: truckDriveOut 1.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes truckIdleSuspension {
+  0%, 100% {
+    transform: perspective(1200px) translateY(0px) rotateX(0deg);
+  }
+  25% {
+    transform: perspective(1200px) translateY(-2px) rotateX(-0.5deg);
+  }
+  50% {
+    transform: perspective(1200px) translateY(1.5px) rotateX(0.4deg);
+  }
+  75% {
+    transform: perspective(1200px) translateY(-1px) rotateX(-0.2deg);
+  }
+}
+
+@keyframes truckBoost {
+  0% {
+    transform: perspective(1200px) translate3d(0, 20px, -180px) scale(0.85);
+    filter: brightness(0.85);
+  }
+  60% {
+    transform: perspective(1200px) translate3d(0, -8px, 60px) scale(1.08);
+    filter: brightness(1.15);
+  }
+  85% {
+    transform: perspective(1200px) translate3d(0, 3px, -10px) scale(0.99);
+  }
+  100% {
+    transform: perspective(1200px) translate3d(0, 0, 0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes leafDrift1 {
+  0% { transform: translate(-30px, -20px) rotate(0deg); opacity: 0; }
+  30% { opacity: 0.85; }
+  100% { transform: translate(380px, 160px) rotate(320deg); opacity: 0; }
+}
+
+@keyframes leafDrift2 {
+  0% { transform: translate(-20px, -10px) rotate(0deg); opacity: 0; }
+  40% { opacity: 0.75; }
+  100% { transform: translate(320px, 120px) rotate(-260deg); opacity: 0; }
+}
+
+@keyframes leafDrift3 {
+  0% { transform: translate(-40px, 0px) rotate(0deg); opacity: 0; }
+  50% { opacity: 0.9; }
+  100% { transform: translate(350px, 140px) rotate(180deg); opacity: 0; }
+}
+
+.animate-truck-idle-suspension {
+  animation: truckIdleSuspension 2.4s ease-in-out infinite;
+}
+
+.animate-truck-boost {
+  animation: truckBoost 1.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-leaf-drift-1 {
+  animation: leafDrift1 4.5s ease-in-out infinite;
+}
+
+.animate-leaf-drift-2 {
+  animation: leafDrift2 5.2s ease-in-out infinite 1.5s;
+}
+
+.animate-leaf-drift-3 {
+  animation: leafDrift3 4.8s ease-in-out infinite 2.8s;
 }
 
 .perspective-1200 {

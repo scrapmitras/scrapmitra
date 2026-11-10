@@ -145,19 +145,78 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes truckIdleSuspension {
-  0%, 100% {
-    transform: perspective(1200px) translateY(0px) rotateX(0deg);
+@keyframes truckRoadDriving {
+  0% {
+    transform: perspective(1400px) translateY(0px) rotateX(0deg);
   }
-  25% {
-    transform: perspective(1200px) translateY(-2px) rotateX(-0.5deg);
+  20% {
+    transform: perspective(1400px) translateY(-3px) rotateX(-0.6deg) rotateZ(0.2deg);
   }
-  50% {
-    transform: perspective(1200px) translateY(1.5px) rotateX(0.4deg);
+  40% {
+    transform: perspective(1400px) translateY(2px) rotateX(0.5deg) rotateZ(-0.2deg);
   }
-  75% {
-    transform: perspective(1200px) translateY(-1px) rotateX(-0.2deg);
+  60% {
+    transform: perspective(1400px) translateY(-2px) rotateX(-0.4deg);
   }
+  80% {
+    transform: perspective(1400px) translateY(1.5px) rotateX(0.3deg);
+  }
+  100% {
+    transform: perspective(1400px) translateY(0px) rotateX(0deg);
+  }
+}
+
+@keyframes wheelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes roadSurfaceStream {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -300px 150px;
+  }
+}
+
+@keyframes sunbeamShimmer {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.58; transform: scale(1.04); }
+}
+
+@keyframes speedLines {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.animate-truck-road-driving {
+  animation: truckRoadDriving 1.8s ease-in-out infinite;
+}
+
+.animate-wheel-spin {
+  animation: wheelSpin 0.3s linear infinite;
+}
+
+.animate-road-surface-stream {
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 30px,
+    transparent 30px,
+    transparent 70px
+  );
+  background-size: 200px 100px;
+  animation: roadSurfaceStream 0.6s linear infinite;
+}
+
+.animate-sunbeam-shimmer {
+  animation: sunbeamShimmer 4s ease-in-out infinite;
+}
+
+.animate-speed-lines {
+  animation: speedLines 0.5s linear infinite;
 }
 
 @keyframes truckBoost {
